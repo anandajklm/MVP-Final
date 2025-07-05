@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Classificador de Inadimplência</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #f0f2f5;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        small {
+            display: block;
+            color: #666;
+            margin-top: 4px;
+            margin-bottom: 8px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            margin-top: 30px;
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Classificação de Inadimplência</h1>
+    <form method="POST">
+
+        <label>ID</label>
+        <small>Identificador do cliente (apenas numérico)</small>
+        <input type="number" name="ID" required>
+
+        <label>Limite de Crédito</label>
+        <small>Valor total do limite de crédito (em NT$)</small>
+        <input type="number" name="LIMIT_BAL" required>
+
+        <label>Sexo</label>
+        <small>1 = Masculino, 2 = Feminino</small>
+        <input type="number" name="SEX" required>
+
+        <label>Escolaridade</label>
+        <small>1 = Pós-graduação, 2 = Universidade, 3 = Ensino Médio, 4 = Outros</small>
+        <input type="number" name="EDUCATION" required>
+
+        <label>Estado Civil</label>
+        <small>1 = Casado(a), 2 = Solteiro(a), 3 = Outros</small>
+        <input type="number" name="MARRIAGE" required>
+
+        <label>Idade</label>
+        <small>Idade do cliente (em anos)</small>
+        <input type="number" name="AGE" required>
+
+        <label>Status de Pagamento (Últimos 6 meses)</label>
+        <small>De -2 a 8. 0 = Pagamento no prazo, 1 = atraso 1 mês, etc.</small>
+
+        <label>Mês mais recente</label>
+        <input type="number" name="PAY_0" required>
+
+        <label>2º mês</label>
+        <input type="number" name="PAY_2" required>
+
+        <label>3º mês</label>
+        <input type="number" name="PAY_3" required>
+
+        <label>4º mês</label>
+        <input type="number" name="PAY_4" required>
+
+        <label>5º mês</label>
+        <input type="number" name="PAY_5" required>
+
+        <label>6º mês</label>
+        <input type="number" name="PAY_6" required>
+
+        <label>Valor das Faturas (Últimos 6 meses)</label>
+        <small>Valores das faturas de cada mês (em NT$)</small>
+
+        <input type="number" name="BILL_AMT1" placeholder="1º mês" required>
+        <input type="number" name="BILL_AMT2" placeholder="2º mês" required>
+        <input type="number" name="BILL_AMT3" placeholder="3º mês" required>
+        <input type="number" name="BILL_AMT4" placeholder="4º mês" required>
+        <input type="number" name="BILL_AMT5" placeholder="5º mês" required>
+        <input type="number" name="BILL_AMT6" placeholder="6º mês" required>
+
+        <label>Valor dos Pagamentos (Últimos 6 meses)</label>
+        <small>Valores pagos pelo cliente a cada mês (em NT$)</small>
+
+        <input type="number" name="PAY_AMT1" placeholder="1º mês" required>
+        <input type="number" name="PAY_AMT2" placeholder="2º mês" required>
+        <input type="number" name="PAY_AMT3" placeholder="3º mês" required>
+        <input type="number" name="PAY_AMT4" placeholder="4º mês" required>
+        <input type="number" name="PAY_AMT5" placeholder="5º mês" required>
+        <input type="number" name="PAY_AMT6" placeholder="6º mês" required>
+
+        <input type="submit" value="Enviar">
+
+    </form>
+
+    {% if prediction %}
+        <h2>Resultado: {{ prediction }}</h2>
+    {% endif %}
+</body>
+</html>
+
+
